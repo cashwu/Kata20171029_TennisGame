@@ -6,7 +6,7 @@ namespace Kata20171029_TennisGame
     [TestClass]
     public class TennisGameTests
     {
-        private TennisGame tennisGame = new TennisGame();
+        private TennisGame tennisGame = new TennisGame("Player1", "Player2");
 
         [TestMethod]
         public void Love_All()
@@ -73,6 +73,14 @@ namespace Kata20171029_TennisGame
             AssertScoreShouldBe("Deuce");
         }
 
+        [TestMethod]
+        public void FirstPlayer_Adv()
+        {
+            FirstPlayerScoreTime(5);
+            SecondPlayerScoreTime(4);
+            AssertScoreShouldBe("Player1 Adv");
+        }
+
         private void SecondPlayerScoreTime(int time)
         {
             for (int i = 0; i < time; i++)
@@ -98,6 +106,8 @@ namespace Kata20171029_TennisGame
 
     public class TennisGame
     {
+        private readonly string player1;
+        private readonly string player2;
         private int firstPlayerScore;
         private int secondPlayerScore;
 
@@ -109,10 +119,20 @@ namespace Kata20171029_TennisGame
                 { 3, "Forty"},
             };
 
+        public TennisGame(string player1, string player2)
+        {
+            this.player1 = player1;
+            this.player2 = player2;
+        }
+
         public string Score()
         {
             if (firstPlayerScore != secondPlayerScore)
             {
+                if (firstPlayerScore > 3)
+                {
+                    return player1 + " Adv";
+                }
                 return scoreMapping[firstPlayerScore] + " " + scoreMapping[secondPlayerScore];
             }
             if (firstPlayerScore >= 3)
