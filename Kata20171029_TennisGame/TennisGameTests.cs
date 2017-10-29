@@ -42,6 +42,21 @@ namespace Kata20171029_TennisGame
             AssertScoreShouldBe("Love Fifteen");
         }
 
+        [TestMethod]
+        public void Love_Thirty()
+        {
+            SecondScoreTime(2);
+            AssertScoreShouldBe("Love Thirty");
+        }
+
+        private void SecondScoreTime(int time)
+        {
+            for (int i = 0; i < time; i++)
+            {
+                tennisGame.SecondPlayerScore();
+            }
+        }
+
         private void FirstPlayerScoreTime(int time)
         {
             for (int i = 0; i < time; i++)
@@ -66,17 +81,14 @@ namespace Kata20171029_TennisGame
         {
             var scoreMapping = new Dictionary<int, string>()
             {
+                { 0, "Love"},
                 { 1, "Fifteen"},
                 { 2, "Thirty"},
                 { 3, "Forty"},
             };
-            if (secondPlayerScore == 1)
+            if (firstPlayerScore != 0 || secondPlayerScore != 0)
             {
-                return "Love " + scoreMapping[secondPlayerScore];
-            }
-            if (firstPlayerScore != 0)
-            {
-                return scoreMapping[firstPlayerScore] + " Love";
+                return scoreMapping[firstPlayerScore] + " " + scoreMapping[secondPlayerScore];
             }
             return "Love All";
         }
