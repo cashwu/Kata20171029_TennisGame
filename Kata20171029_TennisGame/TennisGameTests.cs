@@ -35,6 +35,13 @@ namespace Kata20171029_TennisGame
             AssertScoreShouldBe("Forty Love");
         }
 
+        [TestMethod]
+        public void Love_Fifteen()
+        {
+            tennisGame.SecondPlayerScore();
+            AssertScoreShouldBe("Love Fifteen");
+        }
+
         private void FirstPlayerScoreTime(int time)
         {
             for (int i = 0; i < time; i++)
@@ -53,6 +60,7 @@ namespace Kata20171029_TennisGame
     public class TennisGame
     {
         private int firstPlayerScore;
+        private int secondPlayerScore;
 
         public string Score()
         {
@@ -62,6 +70,10 @@ namespace Kata20171029_TennisGame
                 { 2, "Thirty"},
                 { 3, "Forty"},
             };
+            if (secondPlayerScore == 1)
+            {
+                return "Love " + scoreMapping[secondPlayerScore];
+            }
             if (firstPlayerScore != 0)
             {
                 return scoreMapping[firstPlayerScore] + " Love";
@@ -72,6 +84,11 @@ namespace Kata20171029_TennisGame
         public void FirstPlayerScore()
         {
             firstPlayerScore++;
+        }
+
+        public void SecondPlayerScore()
+        {
+            secondPlayerScore++;
         }
     }
 }
