@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace Kata20171029_TennisGame
@@ -81,6 +82,14 @@ namespace Kata20171029_TennisGame
             AssertScoreShouldBe("Player1 Adv");
         }
 
+        [TestMethod]
+        public void SecondPlayer_Adv()
+        {
+            FirstPlayerScoreTime(4);
+            SecondPlayerScoreTime(5);
+            AssertScoreShouldBe("Player2 Adv");
+        }
+
         private void SecondPlayerScoreTime(int time)
         {
             for (int i = 0; i < time; i++)
@@ -131,7 +140,13 @@ namespace Kata20171029_TennisGame
             {
                 if (firstPlayerScore > 3)
                 {
-                    return player1 + " Adv";
+                    if (Math.Abs(firstPlayerScore - secondPlayerScore) == 1)
+                    {
+                        var advPlayer = firstPlayerScore > secondPlayerScore
+                            ? player1
+                            : player2;
+                        return advPlayer + " Adv";
+                    }
                 }
                 return scoreMapping[firstPlayerScore] + " " + scoreMapping[secondPlayerScore];
             }
