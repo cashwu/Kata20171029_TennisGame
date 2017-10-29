@@ -45,11 +45,19 @@ namespace Kata20171029_TennisGame
         [TestMethod]
         public void Love_Thirty()
         {
-            SecondScoreTime(2);
+            SecondPlayerScoreTime(2);
             AssertScoreShouldBe("Love Thirty");
         }
 
-        private void SecondScoreTime(int time)
+        [TestMethod]
+        public void Fifteen_All()
+        {
+            FirstPlayerScoreTime(1);
+            SecondPlayerScoreTime(1);
+            AssertScoreShouldBe("Fifteen All");
+        }
+
+        private void SecondPlayerScoreTime(int time)
         {
             for (int i = 0; i < time; i++)
             {
@@ -77,20 +85,21 @@ namespace Kata20171029_TennisGame
         private int firstPlayerScore;
         private int secondPlayerScore;
 
-        public string Score()
-        {
-            var scoreMapping = new Dictionary<int, string>()
+        private Dictionary<int, string> scoreMapping = new Dictionary<int, string>()
             {
                 { 0, "Love"},
                 { 1, "Fifteen"},
                 { 2, "Thirty"},
                 { 3, "Forty"},
             };
-            if (firstPlayerScore != 0 || secondPlayerScore != 0)
+
+        public string Score()
+        {
+            if (firstPlayerScore != secondPlayerScore)
             {
                 return scoreMapping[firstPlayerScore] + " " + scoreMapping[secondPlayerScore];
             }
-            return "Love All";
+            return scoreMapping[secondPlayerScore] + " All";
         }
 
         public void FirstPlayerScore()
