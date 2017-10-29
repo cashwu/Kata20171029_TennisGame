@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace Kata20171029_TennisGame
 {
@@ -20,6 +21,14 @@ namespace Kata20171029_TennisGame
             AssertScoreShouldBe("Fifteen Love");
         }
 
+        [TestMethod]
+        public void Thirty_Love()
+        {
+            tennisGame.FirstPlayerScore();
+            tennisGame.FirstPlayerScore();
+            AssertScoreShouldBe("Thirty Love");
+        }
+
         private void AssertScoreShouldBe(string expected)
         {
             string score = tennisGame.Score();
@@ -33,9 +42,14 @@ namespace Kata20171029_TennisGame
 
         public string Score()
         {
+            var scoreMapping = new Dictionary<int, string>()
+            {
+                { 1, "Fifteen"},
+                { 2, "Thirty"},
+            };
             if (firstPlayerScore != 0)
             {
-                return "Fifteen Love";
+                return scoreMapping[firstPlayerScore] + " Love";
             }
             return "Love All";
         }
