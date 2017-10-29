@@ -13,6 +13,13 @@ namespace Kata20171029_TennisGame
             AssertScoreShouldBe("Love All");
         }
 
+        [TestMethod]
+        public void Fifteen_Love()
+        {
+            tennisGame.FirstPlayerScore();
+            AssertScoreShouldBe("Fifteen Love");
+        }
+
         private void AssertScoreShouldBe(string expected)
         {
             string score = tennisGame.Score();
@@ -22,9 +29,20 @@ namespace Kata20171029_TennisGame
 
     public class TennisGame
     {
+        private int firstPlayerScore;
+
         public string Score()
         {
+            if (firstPlayerScore != 0)
+            {
+                return "Fifteen Love";
+            }
             return "Love All";
+        }
+
+        public void FirstPlayerScore()
+        {
+            firstPlayerScore++;
         }
     }
 }
