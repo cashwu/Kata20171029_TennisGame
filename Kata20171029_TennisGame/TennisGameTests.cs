@@ -90,6 +90,14 @@ namespace Kata20171029_TennisGame
             AssertScoreShouldBe("Player2 Adv");
         }
 
+        [TestMethod]
+        public void FirstPlayer_Win()
+        {
+            FirstPlayerScoreTime(4);
+            SecondPlayerScoreTime(0);
+            AssertScoreShouldBe("Player1 Win");
+        }
+
         private void SecondPlayerScoreTime(int time)
         {
             for (int i = 0; i < time; i++)
@@ -140,13 +148,7 @@ namespace Kata20171029_TennisGame
             {
                 if (firstPlayerScore > 3)
                 {
-                    if (Math.Abs(firstPlayerScore - secondPlayerScore) == 1)
-                    {
-                        var advPlayer = firstPlayerScore > secondPlayerScore
-                            ? player1
-                            : player2;
-                        return advPlayer + " Adv";
-                    }
+                    return AdvPlayer() + (IsAdv() ? " Adv" : " Win");
                 }
                 return scoreMapping[firstPlayerScore] + " " + scoreMapping[secondPlayerScore];
             }
@@ -155,6 +157,19 @@ namespace Kata20171029_TennisGame
                 return "Deuce";
             }
             return scoreMapping[secondPlayerScore] + " All";
+        }
+
+        private bool IsAdv()
+        {
+            return Math.Abs(firstPlayerScore - secondPlayerScore) == 1;
+        }
+
+        private string AdvPlayer()
+        {
+            var advPlayer = firstPlayerScore > secondPlayerScore
+                ? player1
+                : player2;
+            return advPlayer;
         }
 
         public void FirstPlayerScore()
