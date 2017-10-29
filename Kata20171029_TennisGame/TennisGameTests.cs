@@ -28,6 +28,13 @@ namespace Kata20171029_TennisGame
             AssertScoreShouldBe("Thirty Love");
         }
 
+        [TestMethod]
+        public void Forty_Love()
+        {
+            FirstPlayerScoreTime(3);
+            AssertScoreShouldBe("Forty Love");
+        }
+
         private void FirstPlayerScoreTime(int time)
         {
             for (int i = 0; i < time; i++)
@@ -53,6 +60,7 @@ namespace Kata20171029_TennisGame
             {
                 { 1, "Fifteen"},
                 { 2, "Thirty"},
+                { 3, "Forty"},
             };
             if (firstPlayerScore != 0)
             {
