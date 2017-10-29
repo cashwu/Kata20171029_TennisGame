@@ -144,19 +144,39 @@ namespace Kata20171029_TennisGame
 
         public string Score()
         {
-            if (firstPlayerScore != secondPlayerScore)
-            {
-                if (firstPlayerScore > 3)
-                {
-                    return AdvPlayer() + (IsAdv() ? " Adv" : " Win");
-                }
-                return scoreMapping[firstPlayerScore] + " " + scoreMapping[secondPlayerScore];
-            }
-            if (firstPlayerScore >= 3)
-            {
-                return "Deuce";
-            }
+            return IsScoreDiff()
+                ? (firstPlayerScore > 3 ? AdvState() : NormalScore())
+                : (IsDeuce() ? Deuce() : SameScore());
+        }
+
+        private string SameScore()
+        {
             return scoreMapping[secondPlayerScore] + " All";
+        }
+
+        private static string Deuce()
+        {
+            return "Deuce";
+        }
+
+        private bool IsDeuce()
+        {
+            return firstPlayerScore >= 3;
+        }
+
+        private bool IsScoreDiff()
+        {
+            return firstPlayerScore != secondPlayerScore;
+        }
+
+        private string AdvState()
+        {
+            return AdvPlayer() + (IsAdv() ? " Adv" : " Win");
+        }
+
+        private string NormalScore()
+        {
+            return scoreMapping[firstPlayerScore] + " " + scoreMapping[secondPlayerScore];
         }
 
         private bool IsAdv()
